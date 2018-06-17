@@ -10,14 +10,12 @@ import (
 
 func main() {
 	r := mux.NewRouter()
-	r.HandleFunc("/", Hello)
+
+	r.HandleFunc("/", Intro)
+	r.HandleFunc("/get", GetEcho).Methods("GET")
+	r.HandleFunc("/post", PostEcho).Methods("POST")
+
 	http.Handle("/", r)
-
-	fmt.Println("Starting server at 8080")
-	log.Fatal(http.ListenAndServe(":8080", nil))
-}
-
-// Hello just sends a hello world message back to the user
-func Hello(w http.ResponseWriter, req *http.Request) {
-	fmt.Fprintln(w, "Hello world!")
+	fmt.Println("Starting server at 80")
+	log.Fatal(http.ListenAndServe(":80", nil))
 }
