@@ -10,7 +10,7 @@ func Intro(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 
-	err := json.NewEncoder(w).Encode(IntroMessage{
+	err := json.NewEncoder(w).Encode(RootResponse{
 		Status:  "ok",
 		Message: "GET /get with query params or POST /post with a body to hear and echo",
 	})
@@ -25,7 +25,7 @@ func GetEcho(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 
-	err := json.NewEncoder(w).Encode(IntroMessage{
+	err := json.NewEncoder(w).Encode(RootResponse{
 		Status:  "ok",
 		Message: "This is where the query params will go",
 	})
@@ -40,7 +40,7 @@ func PostEcho(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 
-	err := json.NewEncoder(w).Encode(IntroMessage{
+	err := json.NewEncoder(w).Encode(RootResponse{
 		Status:  "ok",
 		Message: "This is where the POST body will go",
 	})
