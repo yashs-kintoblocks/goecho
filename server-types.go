@@ -21,3 +21,9 @@ type PostEchoResponse struct {
 	Status      string     `json:"status"`
 	QueryParams url.Values `json:"queryParams"`
 }
+
+// ErrorResponse is what gets sent when there is an error
+type ErrorResponse struct {
+	Status  string `json:"status"`
+	Message error  `json:"message"`
+}
