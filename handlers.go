@@ -22,16 +22,18 @@ func Intro(w http.ResponseWriter, req *http.Request) {
 
 // GetEcho just responds with the query parameters given to the call
 func GetEcho(w http.ResponseWriter, req *http.Request) {
+	queryParams := req.URL.Query()
+	jsonEnc := json.NewEncoder(w)
+
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 
-	err := json.NewEncoder(w).Encode(RootResponse{
-		Status:  "ok",
-		Message: "This is where the query params will go",
-	})
+	err := jsonEnc.Encode(GetEchoResponse{Status: "ok", QueryParams: queryParams})
 
 	if err != nil {
-		panic(err)
+		w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+		w.WriteHeader(http.StatusInternalServerError)
+		jsonEnc.Encode(ErrorResponse{Status: "error", Message: err})
 	}
 }
 
