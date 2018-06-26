@@ -31,7 +31,6 @@ func GetEcho(w http.ResponseWriter, req *http.Request) {
 	err := jsonEnc.Encode(GetEchoResponse{Status: "ok", QueryParams: queryParams})
 
 	if err != nil {
-		w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 		w.WriteHeader(http.StatusInternalServerError)
 		jsonEnc.Encode(ErrorResponse{Status: "error", Message: err})
 	}
@@ -39,15 +38,24 @@ func GetEcho(w http.ResponseWriter, req *http.Request) {
 
 // PostEcho just responds with the query parameters given to the call
 func PostEcho(w http.ResponseWriter, req *http.Request) {
-	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-	w.WriteHeader(http.StatusOK)
+	jsonEnc := json.NewEncoder(w)
+	jsonDec := json.NewDecoder(req.Body)
 
-	err := json.NewEncoder(w).Encode(RootResponse{
-		Status:  "ok",
-		Message: "This is where the POST body will go",
-	})
+	var b map[string]string
 
-	if err != nil {
-		panic(err)
+	decErr := jsonDec.Decode(&b)
+
+	if decErr != nil {
+		w.WriteHeader(http.StatusBadRequest)
+	} else {
+		w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+		w.WriteHeader(http.StatusOK)
+
+		encErr := json.NewEncoder(w).Encode(PostEchoResponse{Status: "ok", Body: b})
+
+		if encErr != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			jsonEnc.Encode(ErrorResponse{Status: "error", Message: encErr})
+		}
 	}
 }
