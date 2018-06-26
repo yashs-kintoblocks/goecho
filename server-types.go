@@ -18,8 +18,8 @@ type GetEchoResponse struct {
 
 // PostEchoResponse is the payload to send back on POST /post
 type PostEchoResponse struct {
-	Status      string     `json:"status"`
-	QueryParams url.Values `json:"queryParams"`
+	Status string            `json:"status"`
+	Body   map[string]string `json:"body"`
 }
 
 // ErrorResponse is what gets sent when there is an error
