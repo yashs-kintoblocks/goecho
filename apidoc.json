@@ -1,0 +1,7 @@
+{
+  "name": "GoEcho",
+  "version": "1.0.0",
+  "description": "A go server that just echoes back everything you pass it",
+  "title": "GoEcho",
+  "url": "https://github.com/yashs-kintoblocks/goecho"
+}
