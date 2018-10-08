@@ -1,4 +1,4 @@
-FROM golang:1.10 AS builder
+FROM golang:1.10.0 AS builder
 
 # need dep, want dep, can't not have dep
 ADD https://github.com/golang/dep/releases/download/v0.4.1/dep-linux-amd64 /usr/bin/dep
