@@ -24,7 +24,7 @@ func main() {
 	* @apiParam (QueryString) {String} key1 value of key1
 	* @apiParam (QueryString) {String} [key2] value of key2
 	* @apiSuccess {Object} data the query params encoded as a JSON object
-	* @apiError {String} error.message the error message
+	* @apiError (400) error.message the error message
 	 */
 	r.HandleFunc("/get", GetEcho).Methods("GET")
 	/**
@@ -33,7 +33,7 @@ func main() {
 	* @apiParam (Body) {String} key1 value of key1
 	* @apiParam (Body) {String} [key2] value of key2
 	* @apiSuccess {Object} data the request body encoded as a JSON object
-	* @apiError {String} error.message the error message
+	* @apiError (400) error.message the error message
 	 */
 	r.HandleFunc("/post", PostEcho).Methods("POST")
 
