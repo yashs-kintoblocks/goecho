@@ -21,8 +21,8 @@ func main() {
 	/**
 	* @api {GET} /get echoes back what you send it in the query params
 	* @apiName GetEcho
-	* @apiParam (QueryString) {String} key1 value of key1
-	* @apiParam (QueryString) {String} [key2] value of key2
+	* @apiParam (Url) {String} key1 value of key1
+	* @apiParam (Url) {String} [key2] value of key2
 	* @apiSuccess {Object} data the query params encoded as a JSON object
 	* @apiError (400) error.message the error message
 	 */
